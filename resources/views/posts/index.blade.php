@@ -8,7 +8,9 @@
     @foreach ($posts as $post)
       <div class="post">
         <ul>
-          <li><h4>ID</h4>{{$post->id}}</li>
+          <li>
+            <a href="{{route('posts.show', $post)}}"><h4>ID</h4></a>{{$post->id}}
+          </li>
           <li><h4>Title</h4>{{$post->title}}</li>
           <li><h4>Date</h4>{{$post->date}}</li>
           <li><h4>Content</h4>{{$post->content}}</li>
@@ -20,9 +22,8 @@
         </ul>
       </div>
       <hr>
-
     @endforeach
-
   </div>
+  <a href="{{route('posts.create')}}">Add a new post</a>
 
 @endsection

@@ -23,12 +23,11 @@ class PostController extends Controller
   *
   * @return \Illuminate\Http\Response
   */
+
  public function index()
  {
-
-     $posts = Post::all();
-
-     return view('posts.index', compact('posts'));
+   $posts = Post::all();
+   return view('posts.index', compact('posts'));
  }
 
  /**
@@ -36,9 +35,10 @@ class PostController extends Controller
   *
   * @return \Illuminate\Http\Response
   */
+
  public function create()
  {
-
+   return view('posts.create');
  }
 
  /**
@@ -47,9 +47,20 @@ class PostController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
+
  public function store(Request $request)
  {
+   // $request->validate($this->validationPost);
 
+   $data = $request->all();
+   $newPost = new Post;
+   $newPost->fill($data);
+
+   $saved = $newPost->save();
+   if ($saved) {
+    $post = Post::all()->last();
+    return redirect()->route('posts.show', compact('post'));
+   }
  }
 
  /**
@@ -60,9 +71,12 @@ class PostController extends Controller
   */
 
 
- public function show(Shoe $shoe)
+ public function show(Post $post)
  {
-
+   if (empty($post)) {
+     abort('404');
+   }
+   return view('posts.show', compact('post'));
  }
 
  /**
@@ -71,7 +85,8 @@ class PostController extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
- public function edit(Shoe $shoe)
+
+ public function edit(Post $post)
  {
 
  }
@@ -83,6 +98,7 @@ class PostController extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
+
  public function update(Request $request, $id)
  {
 
@@ -94,8 +110,10 @@ class PostController extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
- public function destroy(Shoe $shoe)
+
+ public function destroy(Post $post)
  {
 
  }
+
 }
