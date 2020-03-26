@@ -24,6 +24,6 @@
       <hr>
     @endforeach
   </div>
-  <a href="{{route('posts.create')}}">Add a new post</a>
+  <a href="{{route('posts.create')}}">Insert a new post</a>
 
 @endsection

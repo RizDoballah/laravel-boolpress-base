@@ -53,13 +53,13 @@ class PostController extends Controller
    // $request->validate($this->validationPost);
 
    $data = $request->all();
-   $newPost = new Post;
-   $newPost->fill($data);
+   $post = new Post;
+   $post->fill($data);
 
-   $saved = $newPost->save();
+   $saved = $post->save();
    if ($saved) {
-    $post = Post::all()->last();
-    return redirect()->route('posts.show', compact('post'));
+    // $post = Post::all()->last();
+    return redirect()->route('posts.show', $post);
    }
  }
 
@@ -88,7 +88,7 @@ class PostController extends Controller
 
  public function edit(Post $post)
  {
-
+   return view('posts.create', compact('$post'));
  }
 
  /**
@@ -99,9 +99,15 @@ class PostController extends Controller
   * @return \Illuminate\Http\Response
   */
 
- public function update(Request $request, $id)
+ public function update(Request $request, Post $post)
  {
-
+   $request->validate($this->validationPost);
+   $date = $request->all();
+   $post->fill($data);
+   $updated = $post->update();
+   if ($updated) {
+     return redirect()->route('posts.show', $post);
+   }
  }
 
  /**
