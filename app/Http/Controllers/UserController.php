@@ -45,12 +45,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-      $user = User::find($id);
-      foreach ($user->photos as $photo) {
-          dd($photo);
+      if (empty($user)) {
+        abort('404');
       }
+      return view('users.show', compact('user'));
     }
 
     /**

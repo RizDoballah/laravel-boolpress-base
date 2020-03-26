@@ -9,7 +9,7 @@
     @foreach ($users as $user)
       <div class="user">
         <ul>
-          <li>Name: {{$user->name}}</li>
+          <li> <a href="{{route('users.show', $user)}}">Name: {{$user->name}}</a></li>
           <li>Email: {{$user->email}}</li>
           @foreach ($user->photos as $photo)
               <li>Path: {{$photo->path}}</li>
