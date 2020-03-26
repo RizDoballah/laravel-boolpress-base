@@ -1,0 +1,22 @@
+@extends('layouts.layout')
+
+@section('header')
+    <h1>All Users</h1>
+@endsection
+
+@section('main')
+  <div class="users">
+    @foreach ($users as $user)
+      <div class="user">
+        <ul>
+          <li>Name: {{$user->name}}</li>
+          <li>Email: {{$user->email}}</li>
+          @foreach ($user->photos as $photo)
+              <li>Path: {{$photo->path}}</li>
+              <li>Alt: {{$photo->alt}}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endforeach
+  </div>
+@endsection
